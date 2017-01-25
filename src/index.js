@@ -7,8 +7,6 @@ import App from './components/app';
 import reducers from './reducers';
 import SearchBar from './components/search_bar'
 
-const API_KEY = 'AIzaSyB4GW_4vfe_XBD6wyuqItFhRHrmFr-ckJk';
-
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 ReactDOM.render(
