@@ -7,17 +7,22 @@ import VideoDetail from './video_detail';
 const API_KEY = 'AIzaSyB4GW_4vfe_XBD6wyuqItFhRHrmFr-ckJk';
 
 export default class App extends Component {
-
   // When a user creates an input we need to put the results of that in the state:
-  
   constructor(props){
     super(props);
     this.state = {
-      videos: []
+      videos: [],
+      selectedVideo: null
     }
 
     YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
-      this.setState({videos}) // this.setState({videos: videos})
+      //this.setState({videos}) // this.setState({videos: videos})
+
+      // want to set state for all selected videos and all videos that come back from the API:
+       this.setState({
+         videos: videos,
+         selectedVideo: videos[0]
+       })
     })
 
   }
@@ -26,8 +31,10 @@ export default class App extends Component {
     return (
       <div>
         <SearchBar />
-        <VideoDetail video={this.state.videos[0]}  />
-        <VideoList videos={this.state.videos} />
+        <VideoDetail video={this.state.selectedVideo}  />
+        <VideoList
+          onVideoSelect={selectedVideo => this.setState({selectedVideo: selectedVideo})} 
+          videos={this.state.videos} />
       </div>
     );
   }
